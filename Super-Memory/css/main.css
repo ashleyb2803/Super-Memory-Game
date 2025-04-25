@@ -1,3 +1,29 @@
 * {
     box-sizing: border-box;
   }
+
+h1 {
+    text-align: center;
+  
+  }
+
+  .bungee-spice-regular {
+    font-family: "Bungee Spice", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: blue;
+    padding: 10px;
+    gap: 50px 100px
+  }
+  .container > div {
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+  }
