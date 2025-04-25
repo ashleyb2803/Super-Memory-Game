@@ -7,11 +7,6 @@ h1 {
   
   }
 
-  .bungee-spice-regular {
-    font-family: "Bungee Spice", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
   
   .container {
     display: grid;
@@ -27,3 +22,4 @@ h1 {
     font-size: 30px;
     text-align: center;
   }
+ 
