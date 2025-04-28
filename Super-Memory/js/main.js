@@ -2,36 +2,107 @@
 // Each of the "card" objects will be copied twice,
 // then shuffled and used for the board's cards
 const SOURCE_CARDS = [
-    {img: 'https://i.imgur.com/ZXPKaiN.jpg', matched: false},
-    {img: 'https://i.imgur.com/XMEsZBX.jpg', matched: false},
-    {img: 'https://i.imgur.com/6jX1bMT.jpg', matched: false},
-    {img: 'https://i.imgur.com/yKdqsBv.jpg', matched: false},
-    {img: 'https://i.imgur.com/1BV3HLr.jpg', matched: false},
-    {img: 'https://i.imgur.com/QYmN6Hp.jpg', matched: false},
-    {img: 'https://i.imgur.com/D5pWE05.jpg', matched: false},
-    {img: 'https://i.imgur.com/Ss4Xo3x.jpg', matched: false}
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142254-1024x691.stranger-things-dustin-lp.52019.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142255-1024x691.stranger-things-lucas-lp.52019.jpg.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142253-1024x691.stranger-things-will-lp.52019.jpg.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142253-1024x691.stranger-things-mike-lp.52019.jpg.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142252-1024x691.stranger-things-eleven-lp.52019.jpg.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_692x1024-190520142255-1024x691.stranger-things-joyce-lp.52019.jpg.jpg?fit=around%7C776:1149&output-quality=90&crop=776:1149;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142256-1024x691.stranger-things-steve-lp.52019.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false},
+    {img: 'https://akns-images.eonline.com/eol_images/Entire_Site/2019420/rs_691x1024-190520142254-1024x691.stranger-things-billy-lp.52019.jpg?fit=around%7C776:1150&output-quality=90&crop=776:1150;center,top', matched: false}
   ];
-  const CARD_BACK = 'https://i.imgur.com/WoEmI2M.jpg'; 
+  const CARD_BACK = 'https://pyramidinternational.com/cdn/shop/files/wdc101200_9e23987a-8bb7-4ca6-bf64-c25aaa4f4db7_540x.jpg?v=1738716526'; 
   
   /*----- app's state (variables) -----*/
-  let cards; // Array of 16 shuffled card objects
-  let firstCard; // The first card selected by the user
-  
+  let cards; 
+  let firstCard; 
+  let numBad;
+  let ignoreClicks; 
+
+
+
+
   /*----- cached element references -----*/
+  const msgEl = document.querySelector('h3');
   
-  
+
+
+
   /*----- event listeners -----*/
+  document.querySelector('main').addEventListener('click', handleChoice);
   
   
+
+
+
   /*----- functions -----*/
   init();
 
-    // Initialize the game state and render the initial board
+
   function init() {
-    
+    cards = getShuffledCards();
+    firstCard = null;
+    numBad = 0;
+    ignoreClicks = false;
+    render();
   }
+
+
+  function render() {
+    cards.forEach(function(card, index) {
+      const imgEl = document.getElementById(index);
+      const src = (card.matched || card === firstCard) ? card.img : CARD_BACK;
+      imgEl.src = src;
+    });
+    msgEl.innerHTML = `Number of bad attempts: ${numBad}`;
+  }
+
+
+  function getShuffledCards() {
+  let tempCards = [];
+  let cards = [];
+  for (let card of SOURCE_CARDS) {
+   tempCards.push({...card}, {...card});
+  }
+  while (tempCards.length) {
+    let rndIdx = Math.floor(Math.random() * tempCards.length);
+    let card = tempCards.splice(rndIdx, 1)[0];
+    cards.push(card);
+  }
+  return cards;
+}
+
+function handleChoice(event){
+  const cardIdx = parseInt(event.target.id);
+  if (isNaN(cardIdx) || ignoreClicks) return;
+   const card = cards[cardIdx];
+   if (!firstCard) {
+    firstCard = card; // Store the first selected card
+    render(); // Update the display immediately
+   return
+  }
+    if (card === firstCard || card.matched) return;
+    ignoreClicks = true; // Prevent further clicks until processing is done
+    if (card.img === firstCard.img) {
+      card.matched = true;
+      firstCard.matched = true;
+      firstCard = null; // Reset firstCard after a match
+      ignoreClicks = false; // Allow clicks again
+    } else {
+      numBad++;
+      setTimeout(() => {
+        render(); // Hide unmatched cards after a delay
+        firstCard = null; // Reset firstCard after a mismatch
+        ignoreClicks = false; // Allow clicks again
+      }, 1000);
+    }
+   }
   
-  // Initialize all state, then call render()
+
+
+
+
+
     
  
 
