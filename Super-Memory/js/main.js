@@ -72,32 +72,42 @@ const SOURCE_CARDS = [
   return cards;
 }
 
-function handleChoice(event){
+function handleChoice(event) {
   const cardIdx = parseInt(event.target.id);
   if (isNaN(cardIdx) || ignoreClicks) return;
-   const card = cards[cardIdx];
-   if (!firstCard) {
-    firstCard = card; // Store the first selected card
-    render(); // Update the display immediately
-   return
+
+  const card = cards[cardIdx];
+  if (!firstCard) {
+    firstCard = card; // store first selected card
+    render(); // update display immediately to show the first card
+    return;
   }
-    if (card === firstCard || card.matched) return;
-    ignoreClicks = true; // Prevent further clicks until processing is done
-    if (card.img === firstCard.img) {
-      card.matched = true;
-      firstCard.matched = true;
-      firstCard = null; // Reset firstCard after a match
-      ignoreClicks = false; // Allow clicks again
-    } else {
-      numBad++;
-      setTimeout(() => {
-        render(); // Hide unmatched cards after a delay
-        firstCard = null; // Reset firstCard after a mismatch
-        ignoreClicks = false; // Allow clicks again
-      }, 1000);
-    }
-   }
-  
+
+  // prevent clicking the same card twice or clicking already matched cards
+  if (card === firstCard || card.matched) 
+    return;
+
+  ignoreClicks = true; // prevent more clicks until processing is done
+  render(); // update display immediately to show the second card
+
+  if (card.img === firstCard.img) {
+    // Cards match
+    card.matched = true;
+    firstCard.matched = true;
+    firstCard = null; // reset firstCard after a match
+    ignoreClicks = false; // allow clicks again
+    render(); // update the display to show matched cards
+  } else {
+    // cards dont match
+    numBad++;
+    setTimeout(() => {
+      firstCard = null; // reset firstCard after a mismatch
+      render(); // hide unmatched cards after a delay
+      ignoreClicks = false; // allow clicks again
+    }, 1000);
+  }
+}
+
 
 
 
@@ -119,4 +129,4 @@ function handleChoice(event){
 //functions = init function to set up the game, shuffle the cards, and handle card selection
 
 
-// Add audio
+// Add audio?
