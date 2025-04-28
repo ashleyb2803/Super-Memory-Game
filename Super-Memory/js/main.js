@@ -117,3 +117,6 @@ function handleChoice(event){
 //cache = remember this reference to the DOM element
 //event listeners = listen for clicks on the cards
 //functions = init function to set up the game, shuffle the cards, and handle card selection
+
+
+// Add audio

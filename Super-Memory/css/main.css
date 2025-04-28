@@ -1,8 +1,14 @@
 * {
     box-sizing: border-box;
-    font-family: helvetica;
+    font-family: "Neuton", serif;
   }
   
+  h1, h3 {
+    text-shadow: 0 0 10px #fff, 0 0 20px #f90101, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000;
+    color: white;
+}
+
+
   body {
     height: 100vh;
     margin: 0;
@@ -11,6 +17,9 @@
     justify-content: center;
     align-items: center;
     background-color: red;
+    background-image: url("https://images.hdqwalls.com/wallpapers/stranger-things-5k-mv.jpg");
+    background-size: cover;
+    background-position: center;
   }
   
   main {
@@ -23,9 +32,18 @@
   img {
     width: 100%;
     border-radius: 3vmin;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+
+  img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.6);
   }
   
   h3 {
     margin-top: 0;
   }
+  
+
   
