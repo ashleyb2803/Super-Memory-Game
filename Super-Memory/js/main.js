@@ -16,6 +16,7 @@ const SOURCE_CARDS = [
   /*----- app's state (variables) -----*/
   let cards; 
   let firstCard; 
+  let secondCard
   let numBad;
   let ignoreClicks; 
 
@@ -24,13 +25,13 @@ const SOURCE_CARDS = [
 
   /*----- cached element references -----*/
   const msgEl = document.querySelector('h3');
-  
+  const playAgainBtn = document.getElementById('play-again-btn');
 
 
 
   /*----- event listeners -----*/
   document.querySelector('main').addEventListener('click', handleChoice);
-  
+  playAgainBtn.addEventListener('click', init); 
   
 
 
@@ -44,6 +45,7 @@ const SOURCE_CARDS = [
     firstCard = null;
     numBad = 0;
     ignoreClicks = false;
+    playAgainBtn.style.display = 'none';
     render();
   }
 
@@ -55,8 +57,12 @@ const SOURCE_CARDS = [
       imgEl.src = src;
     });
     msgEl.innerHTML = `Number of bad attempts: ${numBad}`;
-  }
 
+    if (cards.every(card => card.matched)) {
+      msgEl.innerHTML = `Congratulations! You matched all cards with ${numBad} bad attempts.`;
+      playAgainBtn.style.display = 'block'; // play again button shows
+  }
+}
 
   function getShuffledCards() {
   let tempCards = [];
@@ -78,37 +84,47 @@ function handleChoice(event) {
 
   const card = cards[cardIdx];
   if (!firstCard) {
-    firstCard = card; // store first selected card
-    render(); // update display immediately to show the first card
+    firstCard = card; // Store the first selected card
+    render(); // Update the display immediately to show the first card
     return;
   }
 
-  // prevent clicking the same card twice or clicking already matched cards
-  if (card === firstCard || card.matched) 
-    return;
+  if (card === firstCard || card.matched) return;
 
-  ignoreClicks = true; // prevent more clicks until processing is done
-  render(); // update display immediately to show the second card
+  secondCard = card; // Store the second selected card
+  ignoreClicks = true; // Prevent further clicks until processing is done
+  render(); // Update the display immediately to show the second card
 
-  if (card.img === firstCard.img) {
+  if (firstCard.img === secondCard.img) {
     // Cards match
-    card.matched = true;
     firstCard.matched = true;
-    firstCard = null; // reset firstCard after a match
-    ignoreClicks = false; // allow clicks again
-    render(); // update the display to show matched cards
+    secondCard.matched = true;
+    firstCard = null;
+    secondCard = null; // Reset both cards after a match
+    ignoreClicks = false; // Allow clicks again
+    render(); // Update the display to show matched cards
   } else {
-    // cards dont match
+    // Cards do not match
     numBad++;
     setTimeout(() => {
-      firstCard = null; // reset firstCard after a mismatch
-      render(); // hide unmatched cards after a delay
-      ignoreClicks = false; // allow clicks again
+      firstCard = null;
+      secondCard = null; // Reset both cards after a mismatch
+      render(); // Hide unmatched cards after a delay
+      ignoreClicks = false; // Allow clicks again
     }, 1000);
   }
 }
 
 
+
+
+
+// render to dilpay second card immediately after selection
+// UNMATCHED -Display -time; const
+
+//set setTimeout
+//first card
+//temp card matched = false
 
 
 
@@ -127,6 +143,3 @@ function handleChoice(event) {
 //cache = remember this reference to the DOM element
 //event listeners = listen for clicks on the cards
 //functions = init function to set up the game, shuffle the cards, and handle card selection
-
-
-// Add audio?

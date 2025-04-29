@@ -41,6 +41,30 @@
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.6);
   }
   
+  .play-again-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: "Neuton", serif;
+    color: white;
+    background-color: #010000; 
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 0 5px #fff, 0 0 10px #f90101, 0 0 15px #ff0000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .play-again-btn:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    box-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000; /* Glow effect */
+  }
+  
+  .play-again-btn:active {
+    transform: scale(0.95); /* Slightly shrink the button when clicked */
+    box-shadow: 0 0 10px #ff0000; /* Dim glow on click */
+  }
+
   h3 {
     margin-top: 0;
   }
