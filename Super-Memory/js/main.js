@@ -53,16 +53,22 @@ const SOURCE_CARDS = [
   function render() {
     cards.forEach(function(card, index) {
       const imgEl = document.getElementById(index);
-      const src = (card.matched || card === firstCard) ? card.img : CARD_BACK;
+      const src = (card.matched || card === firstCard || card === secondCard) ? card.img : CARD_BACK;
       imgEl.src = src;
     });
     msgEl.innerHTML = `Number of bad attempts: ${numBad}`;
-
-    if (cards.every(card => card.matched)) {
+  
+    // Check if all cards are matched
+    if (isWinner()) {
       msgEl.innerHTML = `Congratulations! You matched all cards with ${numBad} bad attempts.`;
-      playAgainBtn.style.display = 'block'; // play again button shows
+      playAgainBtn.style.display = 'block'; // Show the "Play Again" button
+    }
   }
-}
+  
+  function isWinner() {
+    return cards.every(card => card.matched); // Returns true if all cards are matched
+  }
+  
 
   function getShuffledCards() {
   let tempCards = [];
@@ -84,36 +90,39 @@ function handleChoice(event) {
 
   const card = cards[cardIdx];
   if (!firstCard) {
-    firstCard = card; // Store the first selected card
-    render(); // Update the display immediately to show the first card
+    firstCard = card; 
+    render(); 
     return;
   }
 
   if (card === firstCard || card.matched) return;
-
-  secondCard = card; // Store the second selected card
-  ignoreClicks = true; // Prevent further clicks until processing is done
-  render(); // Update the display immediately to show the second card
-
+ if (firstCard && !secondCard) {
+  console.log('second card selected');
+  secondCard = card; 
+  ignoreClicks = true; 
+  render(); 
+ }
+ if (firstCard && secondCard) {
   if (firstCard.img === secondCard.img) {
     // Cards match
     firstCard.matched = true;
     secondCard.matched = true;
     firstCard = null;
     secondCard = null; // Reset both cards after a match
-    ignoreClicks = false; // Allow clicks again
-    render(); // Update the display to show matched cards
+    ignoreClicks = false; 
+    render(); 
   } else {
-    // Cards do not match
+    
     numBad++;
     setTimeout(() => {
       firstCard = null;
-      secondCard = null; // Reset both cards after a mismatch
-      render(); // Hide unmatched cards after a delay
-      ignoreClicks = false; // Allow clicks again
+      secondCard = null; 
+      render(); 
+      ignoreClicks = false; 
     }, 1000);
-  }
+  }}
 }
+
 
 
 
