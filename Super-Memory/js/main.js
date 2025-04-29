@@ -126,6 +126,7 @@
   ignoreClicks = true; 
   render(); 
   }
+  
   if (firstCard && secondCard) {
   if (firstCard.img === secondCard.img) {
     firstCard.matched = true;
