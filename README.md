@@ -19,7 +19,7 @@ game often being called "Pelmanism".
 #### Screenshot:
 
 <img src="images/Screenshot%202025-04-29%20at%204.01.19%E2%80%AFPM.png" alt="screenshot">
-
+<img src="images/Screenshot%202025-04-29%20at%204.04.01%E2%80%AFPM.png" alt="screenshot">
 
 #### Technologies Used:
 
