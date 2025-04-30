@@ -13,7 +13,7 @@
   ];
   const CARD_BACK = 'https://pyramidinternational.com/cdn/shop/files/wdc101200_9e23987a-8bb7-4ca6-bf64-c25aaa4f4db7_540x.jpg?v=1738716526'; 
   
-  const MAX_BAD_ATTEMPTS = 5; 
+  const MAX_BAD_ATTEMPTS = 10; 
 
 
 
@@ -55,7 +55,7 @@
   // Initializes the game by shuffling the cards, 
   // resetting the selected cards and bad attempts,
 
-    function init() {
+  function init() {
     cards = getShuffledCards();
     firstCard = null;
     secondCard = null;
