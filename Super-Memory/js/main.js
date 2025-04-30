@@ -13,11 +13,13 @@
   ];
   const CARD_BACK = 'https://pyramidinternational.com/cdn/shop/files/wdc101200_9e23987a-8bb7-4ca6-bf64-c25aaa4f4db7_540x.jpg?v=1738716526'; 
   
+  const MAX_BAD_ATTEMPTS = 5; 
+
+
+
   // Source Cards is the array that contains the card objects, 
   // each with an image URL and a matched property.
   // Card Back is the URL for the image that will be shown on the back of the cards.
-
-
 
   /*----- app's state (variables) -----*/
   let cards; 
@@ -56,6 +58,7 @@
     function init() {
     cards = getShuffledCards();
     firstCard = null;
+    secondCard = null;
     numBad = 0;
     ignoreClicks = false;
     playAgainBtn.style.display = 'none';
@@ -65,6 +68,7 @@
     // Updates the game boardby iterating over the cards array 
     // and setting the image source for each card element.
     // Updatres 'h3' element with the current number of bad attempts.
+
     function render() {
     cards.forEach(function(card, index) {
       const imgEl = document.getElementById(index);
@@ -75,13 +79,18 @@
     
 
       if (isWinner()) {
-      msgEl.innerHTML = `Congratulations! You matched all cards with ${numBad} bad attempts.`;
-      playAgainBtn.style.display = 'block'; 
+        msgEl.innerHTML = `Congratulations! You matched all cards with ${numBad} bad attempts.`;
+        playAgainBtn.style.display = 'block';
+        ignoreClicks = true; // Prevent further clicks
+      } else if (numBad >= MAX_BAD_ATTEMPTS) {
+        msgEl.innerHTML = `Game Over! You exceeded ${MAX_BAD_ATTEMPTS} bad attempts.`;
+        playAgainBtn.style.display = 'block';
+        ignoreClicks = true; // Prevent further clicks
       }
     }
-  
+    
     function isWinner() {
-    return cards.every(card => card.matched); // Returns true if all cards are matched
+      return cards.every(card => card.matched); // Returns true if all cards are matched
     }
   
   // This function creates a shuffled deck of cards by duplicating each card in SOURCE_CARDS,
