@@ -38,7 +38,8 @@ let ignoreClicks;
 const msgEl = document.querySelector('h3');
 const playAgainBtn = document.getElementById('play-again-btn');
 const backgroundAudio = document.getElementById('background-audio');
-
+const playButton = document.getElementById('play-btn');
+const muteButton = document.getElementById('mute-btn');
 
 
 
@@ -50,7 +51,19 @@ const backgroundAudio = document.getElementById('background-audio');
 /*----- event listeners -----*/
 document.querySelector('main').addEventListener('click', handleChoice);
 playAgainBtn.addEventListener('click', init);
+playButton.addEventListener('click', function() {
+  backgroundAudio.play();
+})
 
+muteButton.addEventListener('click', () => {
+  if (backgroundAudio.muted) {
+    backgroundAudio.muted = false;
+    muteButton.textContent = 'Mute'; // Update button text
+  } else {
+    backgroundAudio.muted = true;
+    muteButton.textContent = 'Unmute'; // Update button text
+  }
+});
 
 
 // Adds a click event listener to the main element 'game board'

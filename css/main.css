@@ -69,5 +69,71 @@
     margin-top: 0;
   }
   
- 
+  .play-btn {
+    position: fixed; /* Fix the button's position relative to the viewport */
+    bottom: 20px; /* Distance from the bottom of the screen */
+    right: 20px; /* Distance from the right side of the screen */
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: "Neuton", serif;
+    color: white;
+    background-color: #010000;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 0 5px #fff, 0 0 10px #f90101, 0 0 15px #ff0000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .play-btn:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    box-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000; /* Glow effect */
+  }
   
+  .play-btn:active {
+    transform: scale(0.95); /* Slightly shrink the button when clicked */
+    box-shadow: 0 0 10px #ff0000; /* Dim glow on click */
+  }
+ 
+  .mute-btn {
+  position: fixed; /* Fix the button's position relative to the viewport */
+  bottom: 20px; /* Distance from the bottom of the screen */
+  left: 20px; /* Distance from the left side of the screen */
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-family: "Neuton", serif;
+  color: white;
+  background-color: #010000;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-shadow: 0 0 5px #fff, 0 0 10px #f90101, 0 0 15px #ff0000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mute-btn:hover {
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
+  box-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000; /* Glow effect */
+}
+
+.mute-btn:active {
+  transform: scale(0.95); /* Slightly shrink the button when clicked */
+  box-shadow: 0 0 10px #ff0000; /* Dim glow on click */
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #ff0000, 0 0 10px #f90101, 0 0 15px #ff0000;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff0000, 0 0 30px #f90101, 0 0 40px #ff0000;
+  }
+  100% {
+    box-shadow: 0 0 5px #ff0000, 0 0 10px #f90101, 0 0 15px #ff0000;
+  }
+}
+
+.play-btn,
+.mute-btn {
+  animation: glow 2s infinite;
+}
