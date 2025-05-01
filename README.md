@@ -16,14 +16,19 @@ as we know now. The card matching game we know now is atrributed to Christopher 
 game often being called "Pelmanism".
 
 
-#### Screenshot:
+##### Screenshot:
 
 <img src="images/Screenshot%202025-04-29%20at%204.01.19%E2%80%AFPM.png" alt="screenshot">
 <img src="images/Screenshot%202025-04-29%20at%204.04.01%E2%80%AFPM.png" alt="screenshot">
 
-#### Technologies Used:
+
+
+###### Technologies Used:
 
 - Javascript
 - HTML
 - CSS
 
+###### Getting Started
+Click the link below to play:
+https://ashleyb2803.github.io/Super-Memory-Game/

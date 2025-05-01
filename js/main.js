@@ -116,7 +116,6 @@ function getShuffledCards() {
   return cards;
 }
 
-
 // This function handles the card selection logic.
 // If no card is selected, it sets the firstCard.
 // If a second card is selected, it checks if the cards match.
